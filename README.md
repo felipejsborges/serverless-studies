@@ -67,9 +67,7 @@ This application was developed in order to learn and practice serverless and mic
 
 <h4>How to start the application 🖥️</h4>
 
-- Install dependencies
-[Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
-[Serverless Framework](https://www.serverless.com/framework/docs/getting-started/)
+- Install dependencies: [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git), and [Serverless Framework](https://www.serverless.com/framework/docs/getting-started/)
 
 - [Setup AWS credentials](https://www.serverless.com/framework/docs/providers/aws/guide/credentials/)
 
@@ -96,7 +94,6 @@ $ yarn deploy
 
 $ cd ../emails-service
 $ yarn deploy
-# Save the production URL
 ```
 
 - Download [this JSON file](insomnia.json) and import on your [Insomnia](https://support.insomnia.rest/).
