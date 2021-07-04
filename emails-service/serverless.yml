@@ -1,0 +1,47 @@
+service:
+  name: email-service
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+  region: us-east-1
+  iamRoleStatements:
+    - Effect: "Allow"
+      Action:
+        - ses:*
+        - sns:*
+      Resource: "*"
+
+plugins:
+  - serverless-webpack
+  - serverless-offline-sns
+  - serverless-offline-ses
+  - serverless-offline
+
+custom:
+  webpack:
+    webpackConfig: ./webpack.config.js
+    includeModules: true
+  serverless-offline-sns:
+    port: 5003
+    debug: false
+    accountId: 430771289110
+  serverless-offline:
+    httpPort: 5000
+    lambdaPort: 5002
+
+functions:
+  sendWelcomeEmail:
+    handler: src/functions/sendWelcomeEmail.handler
+    events:
+      - sns:
+          arn:
+            Fn::Join:
+              - ":"
+              - - "arn:aws:sns"
+                - Ref: "AWS::Region"
+                - Ref: "AWS::AccountId"
+                - "send-welcome-email-topic"
+          topicName: send-welcome-email-topic
+    environment:
+      SES_SOURCE_EMAIL: felipejsborges13@gmail.com

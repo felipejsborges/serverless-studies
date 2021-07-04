@@ -1,0 +1,86 @@
+service:
+  name: todos-service
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+  region: us-east-1
+  iamRoleStatements:
+    - Effect: "Allow"
+      Action:
+        - dynamodb:*
+      Resource: "*"
+
+plugins:
+  - serverless-webpack
+  - serverless-dynamodb-local
+  - serverless-offline
+
+custom:
+  webpack:
+    webpackConfig: ./webpack.config.js
+    includeModules: true
+  dynamodb:
+    stages:
+      - dev
+      - local
+    start:
+      port: 4001
+      inMemory: true
+      migrate: true
+  serverless-offline:
+    httpPort: 4000
+    lambdaPort: 4002
+
+functions:
+  createTodo:
+    handler: src/functions/todos/createTodo.handler
+    events:
+      - http:
+          path: /todos
+          method: POST
+          cors: true
+  findAllTodos:
+    handler: src/functions/todos/findAllTodos.handler
+    events:
+      - http:
+          path: /todos
+          method: GET
+          cors: true
+  findTodoById:
+    handler: src/functions/todos/findTodoById.handler
+    events:
+      - http:
+          path: /todos/{id}
+          method: GET
+          cors: true
+  updateTodoById:
+    handler: src/functions/todos/updateTodoById.handler
+    events:
+      - http:
+          path: /todos/{id}
+          method: PUT
+          cors: true
+  deleteTodoById:
+    handler: src/functions/todos/deleteTodoById.handler
+    events:
+      - http:
+          path: /todos/{id}
+          method: DELETE
+          cors: true
+
+resources:
+  Resources:
+    dbTodos:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: todos
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 5
+          WriteCapacityUnits: 5
