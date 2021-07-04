@@ -23,16 +23,14 @@
 		<!-- version, status da build, status dos testes -->
 	</p>
 	<br>
-	<img src="/.github/banner.jpg" alt="banner" width="80%" />
 </div>
 
 <br>
 
 <h4 align="center">   
 	<a href="#description-">Description 📄</a>		|    
-	<a href="#technologies-">Technologies 🚀</a>		|    
-	<a href="#technologies-">How it works 👨‍💻</a>		|    
-	<a href="#how-to-run-it-on-your-computer-%EF%B8%8F">How to start the application 🖥️</a>
+	<a href="#technologies-">Technologies 🚀</a>	|    
+	<a href="#how-to-start-the-application-%EF%B8%8F">How to start the application 🖥️</a>
 </h4>
 
 <hr>
@@ -41,11 +39,11 @@
   
 This application was developed in order to learn and practice serverless and micro-services architectures. To do that, I created three services.
 
-- <b>Users Service:</b> A CRUD of "users" using a GraphQL API
+- <b>Users Service:</b> A CRUD of "users" using a GraphQL API, through the lib [apollo-server-lambda](https://www.npmjs.com/package/apollo-server-lambda)
 
 - <b>Todos Service:</b> A CRUD of "todos" using a REST API
 
-- <b>Emails Service:</b> A service to send a "welcome e-mail" for every new user.
+- <b>Emails Service:</b> A service to send a "welcome e-mail" for every new user. When a new user is created on Users Service, a message is published on a SNS topic. So, Emails Service is trigged.
 
 <hr>
 
@@ -64,10 +62,6 @@ This application was developed in order to learn and practice serverless and mic
 - [SNS](https://docs.aws.amazon.com/sns/)
 
 - [SES](https://docs.aws.amazon.com/ses/)
-
-<hr>
-
-<h4>How it works 👨‍💻</h4>
 
 <hr>
 
@@ -108,6 +102,8 @@ $ yarn deploy
 - Download [this JSON file](insomnia.json) and import on your [Insomnia](https://support.insomnia.rest/).
 
 - Put URLs on Insomnia environment
+
+- Now just make the requests!
 
 <hr>
 
