@@ -96,7 +96,7 @@ $ cd ../emails-service
 $ yarn deploy
 ```
 
-- Download [this JSON file](insomnia.json) and import on your [Insomnia](https://support.insomnia.rest/).
+- Download [this JSON file](./Insomnia.json) and import on your [Insomnia](https://support.insomnia.rest/).
 
 - Put URLs on Insomnia environment
 
